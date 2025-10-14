@@ -103,10 +103,10 @@ export default function Home() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="neon-card p-6">
             <p className="text-white/80">Aura Plaza Building, near Mas Theatre, Irinjalakuda</p>
-            <p className="text-white mt-2">Phone: <a href="tel:+919000000000" className="underline hover:text-purple-300">+91 90000 00000</a></p>
+            <p className="text-white mt-2">Phone: <a href="tel:+918289940096" className="underline hover:text-purple-300">+91 8289940096</a></p>
             <div className="mt-3 flex gap-3">
               <a className="btn-primary" href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
-              <a className="inline-flex h-10 items-center px-5 rounded-full glass" href="https://wa.me/919000000000" target="_blank" rel="noreferrer">WhatsApp</a>
+              <a className="inline-flex h-10 items-center px-5 rounded-full glass" href="https://wa.me/918289940096" target="_blank" rel="noreferrer">WhatsApp</a>
             </div>
           </div>
           <div className="aspect-video neon-card overflow-hidden">

@@ -36,6 +36,8 @@ function generateSlots(date: Date): Slot[] {
 
 export function BookingForm() {
   const [confirmed, setConfirmed] = useState<BookingInput | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [toast, setToast] = useState<string | null>(null);
 
   const todayIso = format(new Date(), "yyyy-MM-dd");
 
@@ -53,10 +55,25 @@ export function BookingForm() {
     return generateSlots(parsed);
   }, [selectedDate]);
 
-  function onSubmit(values: BookingInput) {
-    localStorage.setItem("game-lobby-latest-booking", JSON.stringify(values));
-    setConfirmed(values);
-    reset({ players: 1 });
+  async function onSubmit(values: BookingInput) {
+    setError(null);
+    try {
+      const res = await fetch("/api/book", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok || data?.ok === false) {
+        throw new Error(data?.error || "Unable to confirm booking, try again.");
+      }
+      localStorage.setItem("game-lobby-latest-booking", JSON.stringify(values));
+      setConfirmed(values);
+      setToast("Booking confirmed! Check your WhatsApp for updates if needed.");
+      reset({ players: 1 });
+    } catch (e: any) {
+      setError(e?.message || "Something went wrong.");
+    }
   }
 
   return (
@@ -116,6 +133,16 @@ export function BookingForm() {
           <p className="text-white/80 text-sm mt-1">
             {format(new Date(confirmed.date), "EEE, dd MMM yyyy")} at {confirmed.time} • {confirmed.section} • {confirmed.players} player(s)
           </p>
+        </div>
+      )}
+      {error && (
+        <div className="mt-4 glass p-3 rounded-lg">
+          <p className="text-red-400 text-sm">{error}</p>
+        </div>
+      )}
+      {toast && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 glass px-4 py-2 rounded-full text-white/90 shadow-lg">
+          {toast}
         </div>
       )}
     </div>
