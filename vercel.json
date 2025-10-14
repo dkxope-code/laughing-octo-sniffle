@@ -1,0 +1,10 @@
+{
+  "redirects": [
+    {
+      "source": "https://www.gamelobby.co.in/(.*)",
+      "destination": "https://gamelobby.co.in/$1",
+      "permanent": true
+    }
+  ]
+}
+
