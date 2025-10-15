@@ -31,3 +31,4 @@ Copy `.env.local.example` to `.env.local` and fill:
 ## Admin
 - Route: `/admin` (Basic Auth)
 - Credentials: `ADMIN_USER` / `ADMIN_PASS`
+

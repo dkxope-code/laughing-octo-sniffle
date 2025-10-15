@@ -61,10 +61,11 @@ export default function AdminPage() {
       </div>
 
       <p className="text-white/60 text-sm mt-4">
-        Note: This demo reads only the latest booking from this device's browser. With Google Sheets enabled, data is stored centrally via the webhook.
+        Note: This demo reads only the latest booking from this device&apos;s browser. With Google Sheets enabled, data is stored centrally via the webhook.
       </p>
     </main>
   );
 }
+
 
 

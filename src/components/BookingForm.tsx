@@ -9,9 +9,9 @@ const schema = z.object({
   date: z.string().min(1, "Select a date"),
   time: z.string().min(1, "Select a time"),
   section: z.enum(["premium", "standard", "racing"], {
-    required_error: "Choose a section",
+    message: "Choose a section",
   }),
-  players: z.coerce.number().int().min(1).max(6),
+  players: z.number().int().min(1).max(6),
   name: z.string().min(2),
   phone: z.string().min(8),
 });
@@ -71,8 +71,8 @@ export function BookingForm() {
       setConfirmed(values);
       setToast("Booking confirmed! Check your WhatsApp for updates if needed.");
       reset({ players: 1 });
-    } catch (e: any) {
-      setError(e?.message || "Something went wrong.");
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : "Something went wrong.");
     }
   }
 
